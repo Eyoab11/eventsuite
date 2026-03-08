@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -75,6 +76,7 @@ const mockInvites = [
 ];
 
 export default function InvitesScreen() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEvent, setSelectedEvent] = useState('All Events');
   const [selectedStatus, setSelectedStatus] = useState('All Statuses');
@@ -93,7 +95,7 @@ export default function InvitesScreen() {
 
   const handleCreateInvite = () => {
     console.log('Create invite clicked');
-    // Navigation to create invite screen will go here
+    router.push('/create-invite');
   };
 
   return (

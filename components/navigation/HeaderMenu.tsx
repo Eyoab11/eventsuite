@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import {
     Modal,
@@ -11,6 +12,7 @@ import {
 
 export default function HeaderMenu() {
   const [menuVisible, setMenuVisible] = useState(false);
+  const router = useRouter();
 
   const handleProfile = () => {
     setMenuVisible(false);
@@ -22,6 +24,13 @@ export default function HeaderMenu() {
     setMenuVisible(false);
     console.log('Sheets clicked');
     // Navigation to sheets will go here
+  };
+
+  const handleLogout = () => {
+    setMenuVisible(false);
+    console.log('Logout clicked');
+    // Clear session/token here
+    router.replace('/login');
   };
 
   return (
@@ -62,6 +71,17 @@ export default function HeaderMenu() {
             >
               <Ionicons name="document-text-outline" size={20} color="#374151" />
               <Text style={styles.menuText}>Sheets</Text>
+            </TouchableOpacity>
+
+            <View style={styles.divider} />
+
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={handleLogout}
+              activeOpacity={0.7}
+            >
+              <Ionicons name="log-out-outline" size={20} color="#EF4444" />
+              <Text style={[styles.menuText, styles.logoutText]}>Logout</Text>
             </TouchableOpacity>
           </View>
         </Pressable>
@@ -109,6 +129,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#374151',
     fontWeight: '500',
+  },
+  logoutText: {
+    color: '#EF4444',
   },
   divider: {
     height: 1,
